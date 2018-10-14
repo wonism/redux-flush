@@ -1,0 +1,57 @@
+{
+  "name": "redux-flush",
+  "version": "0.0.1",
+  "description": "redux middleware for improving performance with frequent actions",
+  "keywords": [
+    "redux",
+    "flush",
+    "flushing",
+    "frequent actions",
+    "performance",
+    "redux-flush"
+  ],
+  "jsnext:main": "es/index.js",
+  "main": "dist/redux-flush.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.js --hot --host 0.0.0.0",
+    "lint": "eslint src/**/*.js || true",
+    "format": "prettier-eslint --write \"./src/**/*.js\"",
+    "build": "NODE_ENV=production webpack -p --config webpack.config.js",
+    "prepare": "npm run build"
+  },
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonism/redux-flush.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wonism/redux-flush/issues"
+  },
+  "homepage": "https://github.com/wonism/redux-flush#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "compression-webpack-plugin": "^2.0.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.2",
+    "prettier-eslint": "^8.8.2",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.5",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build && lint-staged"
+    }
+  }
+}
