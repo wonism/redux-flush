@@ -16,8 +16,10 @@ $ npm run dev
 ## Usage
 __⚠ Caution__
 
-The action with `meta.flush = true` will have array-like payload.
-So, when you write reducers, please be careful.
+Basically, The action with `meta.flush = true` will have array-like payload.
+So, when you write reducers, please be **CAREFUL**.
+
+If you want to pass just action payload, you can add `omitKey`. And it **MUST** be array.
 
 __Example with codes__
 
@@ -27,12 +29,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createFlush from '../es';
 
 const reducers = combineReducers({
-  app: (state = {}, { type, idx, rand }) => {
+  app: (state = {}, { type, num, rand }) => {
     // payload will be delivered as a stream
     if (type === 'CLICK_EVENT') {
       return {
         ...state,
-        idx: [...state.idx, ...idx],
+        num,
         rand: [...state.rand, ...rand],
       };
     }
@@ -46,23 +48,24 @@ const isProduction = process.env.NODE_ENV === 'production';
 const flushMiddleware = createFlush();
 const middleware = applyMiddleware(flushMiddleware);
 const composeEnhancers = !isProduction ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || composeWithDevTools : compose;
-const store = createStore(reducers, { app: { idx: [], rand: [], } }, composeEnhancers(middleware));
+const store = createStore(reducers, { app: { num: -1, rand: [], } }, composeEnhancers(middleware));
 
 {
-  let idx = 0;
+  let num = 0;
 
   document.querySelector('button').addEventListener('click', () => {
     store.dispatch({
       type: 'CLICK_EVENT',
-      idx,
+      num,
       rand: Math.floor(Math.random() * 10) + 1,
       meta: {
         flush: true,
         interval: 1000,
+        omitKey: ['num'],
       },
     });
 
-    idx += 1;
+    num += 1;
   });
 }
 ```

@@ -3,7 +3,7 @@ export default function createFlushOption() {
 
   return () => next => (action) => {
     const { type, meta = {}, ...reducedAction } = action;
-    const { flush: shouldFlush, interval = 400 } = meta;
+    const { flush: shouldFlush, interval = 400, omitKey = [] } = meta;
     const keys = Object.keys(reducedAction);
     const now = Date.now();
 
@@ -16,9 +16,13 @@ export default function createFlushOption() {
     }
 
     keys.forEach((key) => {
-      flushed[type][key] = flushed[type][key]
-        ? [...flushed[type][key], reducedAction[key]]
-        : [reducedAction[key]];
+      if (omitKey.includes(key)) {
+        flushed[type][key] = reducedAction[key];
+      } else {
+        flushed[type][key] = flushed[type][key]
+          ? [...flushed[type][key], reducedAction[key]]
+          : [reducedAction[key]];
+      }
     });
 
     return new Promise((resolve) => {
