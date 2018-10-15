@@ -2,3 +2,7 @@
 
 ## 0.0.1 - 2018-10-15
 - Initial commit
+
+## 0.0.2 - 2018-10-15
+- Change value of interval
+- Write README.md

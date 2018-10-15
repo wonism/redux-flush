@@ -24,10 +24,6 @@ const middleware = applyMiddleware(flushMiddleware);
 const composeEnhancers = !isProduction ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || composeWithDevTools : compose;
 const store = createStore(reducers, { app: { idx: [], rand: [], } }, composeEnhancers(middleware));
 
-const sampleEvent = {
-  event: 'Sample event',
-};
-
 {
   let idx = 0;
 

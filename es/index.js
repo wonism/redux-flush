@@ -3,7 +3,7 @@ export default function createFlushOption() {
 
   return () => next => (action) => {
     const { type, meta = {}, ...reducedAction } = action;
-    const { flush: shouldFlush, interval = 4500 } = meta;
+    const { flush: shouldFlush, interval = 400 } = meta;
     const keys = Object.keys(reducedAction);
     const now = Date.now();
 
