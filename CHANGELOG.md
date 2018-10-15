@@ -9,3 +9,6 @@
 
 ## 0.0.3 - 2018-10-15
 - Add omitKey feature
+
+## 0.0.4 - 2018-10-16
+- Edit sample codes

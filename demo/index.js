@@ -24,6 +24,14 @@ const middleware = applyMiddleware(flushMiddleware);
 const composeEnhancers = !isProduction ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || composeWithDevTools : compose;
 const store = createStore(reducers, { app: { num: -1, rand: [], } }, composeEnhancers(middleware));
 
+store.subscribe(() => {
+  const state = store.getState();
+  const { num, rand } = state.app;
+
+  document.getElementById('number').textContent = num;
+  document.getElementById('random').textContent = rand.join(', ');
+});
+
 {
   let num = 0;
 

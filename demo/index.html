@@ -6,11 +6,56 @@
   <meta name="author" content="wonism" />
   <meta name="description" content="redux middleware for improving performance with frequent actions" />
   <meta name="keywords" content="redux, flush, flushing, frequent actions, performance" />
+  <style>
+    body {
+      background-color: #282a36;
+      font-size: 24px;
+      font-family: sans-serif;
+      user-select: none;
+    }
+
+    h1 {
+      color: #50fa7b;
+    }
+
+    button {
+      color: #ff5555;
+      background-color: #f8f8f2;
+      background-image: none;
+      border: #d4d4d4;
+      border-radius: 4px;
+      font-size: 24px;
+      outline: 0;
+    }
+
+    button:active {
+      color: rgba(255, 90, 90, 0.7);
+      background-color: #e8e8e2;
+    }
+
+    div {
+      color: #f8f8f2;
+    }
+
+    #number,
+    #random {
+      color: #8be9fd;
+    }
+  </style>
 </head>
 <body>
-  <p>Action will invoked with <i>arrayed</i> values.</p>
-  <button>click to create action</button>
-  <div id="app"></div>
+  <h1>Action will invoked with <i>arrayed</i> values.</h1>
+  <p>
+    <button>Click to create action</button>
+  </p>
+  <div>
+    <span>Number in State : </span>
+    <span id="number"></span>
+  </div>
+  <div>
+    <span>Random Stream in State : </span>
+    <span id="random"></span>
+  </div>
   <script type="text/javascript" src="/redux-flush.js"></script>
 </body>
 </html>

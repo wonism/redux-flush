@@ -2,6 +2,9 @@
 > Redux middleware for flushing frequent actions.
 > It optimizes the redux based application via reducing re-rendering caused of changed state.
 
+[![npm version](https://badge.fury.io/js/redux-flush.svg)](https://badge.fury.io/js/redux-flush)
+[![Build Status](https://travis-ci.org/wonism/redux-flush.svg)](https://travis-ci.org/wonism/redux-flush)
+
 ## Installation
 ```
 $ npm i -S redux-flush
@@ -20,6 +23,10 @@ Basically, The action with `meta.flush = true` will have array-like payload.
 So, when you write reducers, please be **CAREFUL**.
 
 If you want to pass just action payload, you can add `omitKey`. And it **MUST** be array.
+
+__Example__
+
+![Example Image](https://raw.githubusercontent.com/wonism/redux-flush/master/demo/redux-flush.gif)
 
 __Example with codes__
 
@@ -49,6 +56,14 @@ const flushMiddleware = createFlush();
 const middleware = applyMiddleware(flushMiddleware);
 const composeEnhancers = !isProduction ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || composeWithDevTools : compose;
 const store = createStore(reducers, { app: { num: -1, rand: [], } }, composeEnhancers(middleware));
+
+store.subscribe(() => {
+  const state = store.getState();
+  const { num, rand } = state.app;
+
+  document.getElementById('number').textContent = num;
+  document.getElementById('random').textContent = rand.join(', ');
+});
 
 {
   let num = 0;
