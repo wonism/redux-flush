@@ -21,4 +21,11 @@ node_modules/
 .git
 .svn
 
+# dev
 demo
+__test__
+webpack.config.js
+.babelrc
+.eslintrc.js
+.lintstagedrc
+.travis.yml
