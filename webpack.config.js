@@ -65,6 +65,10 @@ const config = {
       'node_modules',
       path.resolve(__dirname, 'es'),
     ],
+    alias: {
+      'demo': path.resolve(__dirname, 'demo'),
+      'es': path.resolve(__dirname, 'es'),
+    },
   },
   plugins,
   module: {

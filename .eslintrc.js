@@ -16,6 +16,11 @@ module.exports = {
     '$Diff': true,
   },
   rules: {
+    'arrow-parens': [
+      error,
+      'as-needed',
+      { 'requireForBlockBody': true },
+    ],
     'comma-dangle': [
       error,
       {

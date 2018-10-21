@@ -33,7 +33,9 @@ __Example with codes__
 ```js
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import createFlush from '../es';
+import createFlush from 'redux-flush/es';
+// or
+// import createFlush from 'redux-flush';
 
 const reducers = combineReducers({
   app: (state = {}, { type, num, rand }) => {

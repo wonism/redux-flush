@@ -19,9 +19,7 @@ export default function createFlushOption() {
       if (omitKey.includes(key)) {
         flushed[type][key] = reducedAction[key];
       } else {
-        flushed[type][key] = flushed[type][key]
-          ? [...flushed[type][key], reducedAction[key]]
-          : [reducedAction[key]];
+        flushed[type][key] = flushed[type][key] ? [...flushed[type][key], reducedAction[key]] : [reducedAction[key]];
       }
     });
 
@@ -32,10 +30,12 @@ export default function createFlushOption() {
 
           delete flushed[type];
 
-          resolve(next({
-            ...newAction,
-            type,
-          }));
+          resolve(
+            next({
+              ...newAction,
+              type,
+            })
+          );
         }
       }, interval - (now - flushed[type].now));
     });

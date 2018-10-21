@@ -12,3 +12,7 @@
 
 ## 0.0.4 - 2018-10-16
 - Edit sample codes
+
+## 0.0.5 - 2018-10-21
+- Write test codes
+- Reorganize file structure

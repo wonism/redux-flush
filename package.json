@@ -1,6 +1,6 @@
 {
   "name": "redux-flush",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Redux middleware for flushing frequent actions. It optimizes the redux based application via reducing re-rendering caused of changed state.",
   "keywords": [
     "redux",
@@ -15,9 +15,10 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.js --hot --host 0.0.0.0",
     "lint": "eslint src/**/*.js || true",
-    "format": "prettier-eslint --write \"./src/**/*.js\"",
+    "format": "prettier-eslint --write \"./es/**/*.js\" \"./demo/**/*.js\" \"./__test__/**/*.js\"",
     "build": "NODE_ENV=production webpack -p --config webpack.config.js",
-    "prepare": "npm run build"
+    "prepare": "npm run lint && npm t && npm run build",
+    "test": "jest"
   },
   "author": "",
   "repository": {
@@ -34,17 +35,23 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "compression-webpack-plugin": "^2.0.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.1.2",
+    "jest": "^23.6.0",
     "lint-staged": "^7.3.0",
     "prettier-eslint": "^8.8.2",
+    "prettier-eslint-cli": "^4.7.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
+    "redux-mock-store": "^1.5.3",
+    "regenerator-runtime": "^0.12.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
@@ -52,7 +59,14 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint-staged && npm t"
+    }
+  },
+  "jest": {
+    "verbose": true,
+    "bail": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest"
     }
   }
 }
