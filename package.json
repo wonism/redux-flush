@@ -1,6 +1,6 @@
 {
   "name": "redux-flush",
-  "version": "0.0.5",
+  "version": "0.1.0-alpha.0",
   "description": "Redux middleware for flushing frequent actions. It optimizes the redux based application via reducing re-rendering caused of changed state.",
   "keywords": [
     "redux",

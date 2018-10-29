@@ -3,7 +3,7 @@ export default function createFlushOption() {
 
   return () => next => (action) => {
     const { type, meta = {}, ...reducedAction } = action;
-    const { flush: shouldFlush, interval = 400, omitKey = [] } = meta;
+    const { flush: shouldFlush, interval = 400, omitKey = [], buncher = '' } = meta;
     const keys = Object.keys(reducedAction);
     const now = Date.now();
 
@@ -11,24 +11,26 @@ export default function createFlushOption() {
       return next(action);
     }
 
-    if (!flushed[type]) {
-      flushed[type] = { type, now };
+    if (!flushed[`${type}${buncher}`]) {
+      flushed[`${type}${buncher}`] = { type, now };
     }
 
     keys.forEach((key) => {
       if (omitKey.includes(key)) {
-        flushed[type][key] = reducedAction[key];
+        flushed[`${type}${buncher}`][key] = reducedAction[key];
       } else {
-        flushed[type][key] = flushed[type][key] ? [...flushed[type][key], reducedAction[key]] : [reducedAction[key]];
+        flushed[`${type}${buncher}`][key] = flushed[`${type}${buncher}`][key]
+          ? [...flushed[`${type}${buncher}`][key], reducedAction[key]]
+          : [reducedAction[key]];
       }
     });
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        if (flushed[type]) {
-          const { now: n, ...newAction } = flushed[type];
+        if (flushed[`${type}${buncher}`]) {
+          const { now: n, ...newAction } = flushed[`${type}${buncher}`];
 
-          delete flushed[type];
+          delete flushed[`${type}${buncher}`];
 
           resolve(
             next({
@@ -37,7 +39,7 @@ export default function createFlushOption() {
             })
           );
         }
-      }, interval - (now - flushed[type].now));
+      }, interval - (now - flushed[`${type}${buncher}`].now));
     });
   };
 }
