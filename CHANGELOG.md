@@ -16,3 +16,6 @@
 ## 0.0.5 - 2018-10-21
 - Write test codes
 - Reorganize file structure
+
+## 0.0.6 - 2018-11-10
+- Update some node modules
